@@ -1,0 +1,68 @@
+class Block {
+  field int xCoord, yCoord;
+  static int blockW, margin;
+
+  constructor Block new(int x, int y) {
+    let xCoord = x;
+    let yCoord = y;
+    return this;
+  }
+
+  function Block newRandBlock() {
+    var int randX, randY;
+    var Block randBlock;
+    let randX = Rand.randRange(50);
+    let randY = Rand.randRange(24);
+    let randBlock = Block.new(randX, randY);
+    do Block.drawRandBlock(randBlock);
+    return randBlock;
+  }
+
+  method int getCoord(boolean x) {
+    if (x) {
+      return xCoord;
+    } else {
+      return yCoord;
+    }
+  }
+  
+  function void dispose(Block block) {
+    do Memory.deAlloc(block);
+    return;
+  }
+
+  function void setBlockInfo(int bw, int m) {
+    let blockW = bw;
+    let margin = m;
+    return;
+  }
+
+  function void drawFullBlock(Block block, boolean black) {
+    var int x1, y1, x2, y2;
+    var int xIndx, yIndx;
+    let xIndx = block.getCoord(true);
+    let yIndx = block.getCoord(false);
+    let x1 = xIndx * blockW + margin;
+    let y1 = yIndx * blockW + margin;
+    let x2 = xIndx * blockW + blockW - margin;
+    let y2 = yIndx * blockW + blockW - margin;
+    do Screen.setColor(black);
+    do Screen.drawRectangle(x1, y1, x2, y2);
+    return;
+  }
+  function void drawRandBlock(Block randBlock) {
+    var int innerX1, innerY1, innerX2, innerY2;
+    var int xIndx, yIndx;
+    do Block.drawFullBlock(randBlock, true);
+    let xIndx = randBlock.getCoord(true);
+    let yIndx = randBlock.getCoord(false);
+    let innerX1 = xIndx * blockW + margin + 1;
+    let innerY1 = yIndx * blockW + margin + 1;
+    let innerX2 = xIndx * blockW + blockW - margin - 1; 
+    let innerY2 = yIndx * blockW + blockW - margin - 1; 
+    do Screen.setColor(false);
+    do Screen.drawRectangle(innerX1, innerY1, innerX2, innerY2);
+    return;
+  }
+}
+

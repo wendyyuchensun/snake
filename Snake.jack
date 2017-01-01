@@ -1,0 +1,29 @@
+class Snake {
+  function Array init(int l) {
+    var Array snake;
+    var int i;
+    let snake = Array.new(l);
+    let i = 0;
+    while (i < l) {
+      let snake[i] = Block.new(i, 0);
+      do Block.drawFullBlock(snake[i], true); 
+      let i = i + 1;
+    }
+    return snake;
+  }
+ 
+  function Block getBlock(Array snake, int indx) {
+    return snake[indx];
+  }
+ 
+  function void dispose(Array snake, int l) {
+    var int i;
+    let i = 0;
+    while (i < l) {
+      do Block.dispose(Snake.getBlock(snake, i));
+      let i = i + 1;
+    }
+    do snake.dispose();
+    return;
+  }
+}

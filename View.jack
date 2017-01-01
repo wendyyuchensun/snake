@@ -1,0 +1,21 @@
+class View {
+  field int length;
+  field Snake snake;
+  field Block targetBlock;
+
+  constructor View init(int l) {
+    do Rand.setSeed(7);
+    do Block.setBlockInfo(10, 1);
+    let length = l;
+    let snake = Snake.init(length);
+    let targetBlock = Block.newRandBlock();
+    return this;
+  }
+  
+  method void dispose() {
+    do Snake.dispose(snake, length);
+    do Block.dispose(targetBlock);
+    do Memory.deAlloc(this);
+    return;
+  }
+}
