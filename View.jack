@@ -5,6 +5,7 @@ class View {
   field int dir;
 
   static boolean terminated;
+  static int speed;
 
   constructor View init(int l) {
     do Rand.setSeed(17);
@@ -13,8 +14,9 @@ class View {
     let snake = Snake.init(length);
     let target = Block.newRandBlock();
     let dir = 1;
+    let speed = 5000;
     let terminated = false;
-    do Sys.wait(5000);
+    do Sys.wait(speed);
     return this;
   }
  
@@ -36,7 +38,14 @@ class View {
       } else {
         do Snake.moveSnake(snake, length, dir);
       }
-      do Sys.wait(5000);
+      if (length = 10) {let speed = 4000;}
+      if (length = 20) {let speed = 3000;}
+      if (length = 30) {let speed = 2000;}
+      if (length = 40) {let speed = 1000;}
+      if (length = 50) {let speed = 500;}
+      if (length = 60) {let speed = 250;}
+      if (length = 70) {let speed = 100;}
+      do Sys.wait(speed);
       let terminated = false;
     }
     return;
