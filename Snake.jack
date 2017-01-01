@@ -7,6 +7,7 @@ class Snake {
     while (i < l) {
       let snake[i] = Block.new(i, 0);
       do Block.drawFullBlock(snake[i], true); 
+      // do Block.printBlockCoord(snake[i]);
       let i = i + 1;
     }
     return snake;
@@ -17,15 +18,18 @@ class Snake {
   }
  
   function void moveSnake(Array snake, int l, int dir) {
-    var int i;
+    var int i, tmpl;
     let i = 0;
+    let tmpl = l - 1;
     do Block.drawFullBlock(snake[i], false);
     do Block.dispose(snake[i]);
-    while (i < l - 1) {
+    while (i < tmpl) {
       let snake[i] = snake[i + 1];
+      // do Block.printBlockCoord(snake[i]);
       let i = i + 1;
     }
     let snake[l - 1] = Block.moveHeadBlock(snake[l - 1], dir);
+    // do Block.printBlockCoord(snake[l - 1]);
     return;
   }
 
@@ -38,6 +42,7 @@ class Snake {
     let i = 0;
     while (i < l) {
       let newSnake[i] = snake[i];
+      // do Block.printBlockCoord(newSnake[i]);
       let i = i + 1;
     }
     do Snake.dispose(snake, l);
@@ -56,4 +61,15 @@ class Snake {
     do snake.dispose();
     return;
   }
+  
+  // debug
+  function void printSnakeCoords(Array snake, int l) {
+    var int i;
+    let i = 0;
+    while (i < l) {
+      do Block.printBlockCoord(snake[i]);
+      let i = i + 1;
+    }
+    return;
+  }   
 }

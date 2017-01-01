@@ -15,6 +15,7 @@ class Block {
     let randY = Rand.randRange(24);
     let randBlock = Block.new(randX, randY);
     do Block.drawRandBlock(randBlock);
+    // do Block.printBlockCoord(randBlock);
     return randBlock;
   }
 
@@ -99,6 +100,27 @@ class Block {
     let innerY2 = yIndx * blockW + blockW - margin - 1; 
     do Screen.setColor(false);
     do Screen.drawRectangle(innerX1, innerY1, innerX2, innerY2);
+    return;
+  }
+
+  // debug
+  function void printBlockCoord(Block block) {
+    var String uParam, comma, lParam;
+    var int xIndx, yIndx;
+    let xIndx = block.getCoord(true);
+    let yIndx = block.getCoord(false);
+    let uParam = "(";
+    let comma = ",";
+    let lParam = ")";
+    do Output.printString(uParam);
+    do Output.printInt(xIndx);
+    do Output.printString(comma);
+    do Output.printInt(yIndx);
+    do Output.printString(lParam);
+    do Output.println();
+    do uParam.dispose();
+    do comma.dispose();
+    do lParam.dispose();
     return;
   }
 }
