@@ -2,6 +2,7 @@ class Main {
   function void main() {
     var View view;
     let view = View.init(7);
+    do view.move();
     do view.dispose();
     return;
   }

@@ -1,20 +1,43 @@
 class View {
   field int length;
   field Snake snake;
-  field Block targetBlock;
+  field Block target;
+  field int dir;
 
   constructor View init(int l) {
     do Rand.setSeed(7);
     do Block.setBlockInfo(10, 1);
     let length = l;
     let snake = Snake.init(length);
-    let targetBlock = Block.newRandBlock();
+    let target = Block.newRandBlock();
+    let dir = 1;
+    do Sys.wait(3000);
     return this;
   }
-  
+ 
+  method void move() {
+    var int key;
+    var boolean matched;
+    let key = Keyboard.keyPressed();
+    if ((key = 132) & ~(dir = 2)) {let dir = 1;}
+    if ((key = 130) & ~(dir = 1)) {let dir = 2;}
+    if ((key = 131) & ~(dir = 4)) {let dir = 3;}
+    if ((key = 133) & ~(dir = 3)) {let dir = 4;}
+    let matched = Block.matched(snake[length - 1], target, dir);
+    if (matched) {
+      let snake = Snake.lengthenSnake(snake, length, target);
+      let target = Block.newRandBlock();
+      let length = length + 1;
+    } else {
+      do Snake.moveSnake(snake, length, dir);
+    }
+    do Sys.wait(3000);
+    return;
+  }
+
   method void dispose() {
     do Snake.dispose(snake, length);
-    do Block.dispose(targetBlock);
+    do Block.dispose(target);
     do Memory.deAlloc(this);
     return;
   }

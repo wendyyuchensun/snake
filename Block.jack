@@ -19,11 +19,43 @@ class Block {
   }
 
   method int getCoord(boolean x) {
+    var int retCoord;
     if (x) {
-      return xCoord;
+      let retCoord = xCoord;
     } else {
-      return yCoord;
+      let retCoord = yCoord;
     }
+    return retCoord;
+  }
+
+  function boolean matched(Block head, Block target, int dir) {
+    var int headX, headY, targetX, targetY;
+    var boolean matched;
+    let matched = false;
+    if (dir = 1){let headX = head.getCoord(true) + 1;}
+    if (dir = 2){let headX = head.getCoord(true) - 1;}
+    if (dir = 3){let headY = head.getCoord(false) - 1;}
+    if (dir = 4){let headY = head.getCoord(false) + 1;}
+    let targetX = target.getCoord(true);
+    let targetY = target.getCoord(false);
+    if ((headX = targetX) & (headY = targetY)) {
+      let matched = true; 
+    }
+    return matched;
+  } 
+
+  function Block moveHeadBlock(Block headBlock, int dir) {
+    var int newXCoord, newYCoord;
+    var BLock newHeadBlock;
+    let newXCoord = headBlock.getCoord(true);
+    let newYCoord = headBlock.getCoord(false);
+    if (dir = 1) {let newXCoord = newXCoord + 1;}
+    if (dir = 2) {let newXCoord = newXCoord - 1;}
+    if (dir = 3) {let newYCoord = newYCoord - 1;}
+    if (dir = 4) {let newYCoord = newYCoord + 1;}
+    let newHeadBlock = Block.new(newXCoord, newYCoord);
+    do Block.drawFullBlock(newHeadBlock, true);
+    return newHeadBlock;
   }
   
   function void dispose(Block block) {
@@ -37,7 +69,7 @@ class Block {
     return;
   }
 
-  function void drawFullBlock(Block block, boolean black) {
+  function void drawFullBlock(Block block, boolean color) {
     var int x1, y1, x2, y2;
     var int xIndx, yIndx;
     let xIndx = block.getCoord(true);
@@ -46,10 +78,15 @@ class Block {
     let y1 = yIndx * blockW + margin;
     let x2 = xIndx * blockW + blockW - margin;
     let y2 = yIndx * blockW + blockW - margin;
-    do Screen.setColor(black);
+    if (color) {
+      do Screen.setColor(true);
+    } else {
+      do Screen.setColor(false);
+    }
     do Screen.drawRectangle(x1, y1, x2, y2);
     return;
   }
+  
   function void drawRandBlock(Block randBlock) {
     var int innerX1, innerY1, innerX2, innerY2;
     var int xIndx, yIndx;
