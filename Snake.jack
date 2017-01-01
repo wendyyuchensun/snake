@@ -45,9 +45,8 @@ class Snake {
       // do Block.printBlockCoord(newSnake[i]);
       let i = i + 1;
     }
-    do Snake.dispose(snake, l);
+    do snake.dispose();
     let newSnake[i] = target;
-    do Block.dispose(target);
     return newSnake;
   } 
 

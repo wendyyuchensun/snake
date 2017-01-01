@@ -33,10 +33,12 @@ class Block {
     var int headX, headY, targetX, targetY;
     var boolean matched;
     let matched = false;
-    if (dir = 1){let headX = head.getCoord(true) + 1;}
-    if (dir = 2){let headX = head.getCoord(true) - 1;}
-    if (dir = 3){let headY = head.getCoord(false) - 1;}
-    if (dir = 4){let headY = head.getCoord(false) + 1;}
+    let headX = head.getCoord(true);
+    let headY = head.getCoord(false);
+    if (dir = 1){let headX = headX + 1;}
+    if (dir = 2){let headX = headX - 1;}
+    if (dir = 3){let headY = headY - 1;}
+    if (dir = 4){let headY = headY + 1;}
     let targetX = target.getCoord(true);
     let targetY = target.getCoord(false);
     if ((headX = targetX) & (headY = targetY)) {

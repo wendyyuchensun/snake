@@ -7,7 +7,7 @@ class View {
   static boolean terminated;
 
   constructor View init(int l) {
-    do Rand.setSeed(7);
+    do Rand.setSeed(17);
     do Block.setBlockInfo(10, 1);
     let length = l;
     let snake = Snake.init(length);
