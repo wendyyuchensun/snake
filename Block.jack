@@ -8,11 +8,38 @@ class Block {
     return this;
   }
 
-  function Block newRandBlock() {
-    var int randX, randY;
-    var Block randBlock;
+  function Block newRandBlock(Snake snake, int l) {
+    var int randX, randY, i, blockX, blockY;
+    var Block randBlock, tmpBlock;
+    var boolean matched;
     let randX = Rand.randRange(50);
     let randY = Rand.randRange(24);
+    let i = 0;
+    let matched = false;
+    while (i < l) {
+      let tmpBlock = snake[i];
+      let blockX = tmpBlock.getCoord(true); 
+      let blockY = tmpBlock.getCoord(false);
+      if ((blockX = randX) & (blockY = randY)) {
+        let matched = true;
+      }
+      let i = i + 1; 
+    }
+    while (matched) {
+      let matched = false;
+      let randX = Rand.randRange(50);
+      let randY = Rand.randRange(24);
+      let i = 0;
+      while (i < l) {
+        let tmpBlock = snake[i];
+        let blockX = tmpBlock.getCoord(true); 
+        let blockY = tmpBlock.getCoord(false);
+        if ((blockX = randX) & (blockY = randY)) {
+          let matched = true;
+        }
+        let i = i + 1; 
+      }
+    }
     let randBlock = Block.new(randX, randY);
     do Block.drawRandBlock(randBlock);
     // do Block.printBlockCoord(randBlock);

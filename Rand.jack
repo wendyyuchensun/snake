@@ -24,7 +24,7 @@ class Rand {
     while (ret > range) {
       let ret = Rand.rand() & mask;
     }
-    let seed = ret;
+    do Rand.setSeed(Rand.rand());
     return ret;
   }
 
