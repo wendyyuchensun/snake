@@ -87,7 +87,41 @@ class Block {
     do Block.drawFullBlock(newHeadBlock, true);
     return newHeadBlock;
   }
-  
+ 
+  function boolean seeIfLose(int l, Snake snake, int dir) {
+    var boolean bumpWall, bumpBody, lose;
+    var int headX, headY, i, newL, tmpX, tmpY;
+    var Block head, tmpBlock;
+    let bumpWall = false;
+    let bumpBody = false;
+    let lose = false;
+    let newL = l - 1;
+    let head = snake[newL];
+    let headX = head.getCoord(true);
+    let headY = head.getCoord(false);
+    if (dir = 1){let headX = headX + 1;}
+    if (dir = 2){let headX = headX - 1;}
+    if (dir = 3){let headY = headY - 1;}
+    if (dir = 4){let headY = headY + 1;}
+    if ((headX < 0) | (headX > 50) | (headY > 24) | (headY < 0)) {
+      let bumpWall = true; 
+    }
+    let i = 1;
+    while (i < newL) {
+      let tmpBlock = snake[i];
+      let tmpX = tmpBlock.getCoord(true);
+      let tmpY = tmpBlock.getCoord(false);
+      if ((headX = tmpX) & (headY = tmpY)) {
+        let bumpBody = true;
+      }
+      let i = i + 1;
+    }
+    if ((bumpWall) | (bumpBody)) {
+      let lose = true;
+    }
+    return lose;
+  }
+ 
   function void dispose(Block block) {
     do Memory.deAlloc(block);
     return;
