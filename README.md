@@ -1,7 +1,7 @@
 # Snake Game
 A Jack (higher level language in Nand2Tetris) implementation of snake game.
 
-(https://github.com/wendyyuchensun/snakeGame/blob/master/pic.png)
+![Alt text](/pic.jpeg?raw=true "Screenshot of snake")
 
 This is what I did when I tried to get familiar with Jack language, as Nand2Tetris Ch9 asks learners to do, in order to prepare myself to code a Jack compiler later.
 
