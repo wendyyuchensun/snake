@@ -26,11 +26,23 @@ class View {
   }
 
   function int askSeed() {
+    // Unable to check type due to design of Jack language
     var int userSeed;
-    var String message;
-    let message = "Choose your lucky number (1~99): ";
-    let userSeed = Keyboard.readInt(message); 
-    do message.dispose();
+    var String message1, message2, message3;
+    let message1 = "Choose your lucky number (1~99).";
+    let message2 = "Hit enter after you've done choosen: ";
+    let message3 = "Invalid number. Choose again (1~99): ";
+    do Output.printString(message1);
+    do Output.println();
+    let userSeed = Keyboard.readInt(message2); 
+    do Output.println();
+    while ((userSeed > 99) | (userSeed < 0)) {
+      do Output.println();
+      let userSeed = Keyboard.readInt(message3);
+    }
+    do message1.dispose();
+    do message2.dispose();
+    do message3.dispose();
     return userSeed;
   }
  
